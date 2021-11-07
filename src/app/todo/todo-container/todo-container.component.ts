@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
-import { addTodo, deleteTodo } from 'src/app/state/todo/todo.actions';
+import {
+  addTodo,
+  deleteTodo,
+  loadTodos,
+} from 'src/app/state/todo/todo.actions';
 import {
   selectNumberOfTodos,
   selectTodos,
@@ -13,9 +17,12 @@ import {
   styleUrls: ['./todo-container.component.scss'],
 })
 export class TodoContainerComponent {
-  constructor(private store: Store) {}
   todos$ = this.store.select(selectTodos);
   numberOfTodos$ = this.store.select(selectNumberOfTodos);
+
+  constructor(private store: Store) {
+    this.store.dispatch(loadTodos());
+  }
 
   onAddTodo(title: string) {
     this.store.dispatch(addTodo({ title }));

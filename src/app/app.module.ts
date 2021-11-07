@@ -12,6 +12,8 @@ import { todoReducer } from './state/todo/todo.reducer';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TodoHeaderComponent } from './todo/todo-header/todo-header.component';
 import { TodoAddComponent } from './todo/todo-add/todo-add.component';
+import { TodoEffects } from './state/todo/todo.effects';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { TodoAddComponent } from './todo/todo-add/todo-add.component';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({ todo: todoReducer }, {}),
-    // EffectsModule.forRoot([]),
+    EffectsModule.forRoot([TodoEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
