@@ -1,15 +1,15 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { Todo } from 'src/app/todo/todo.model';
-import { TodoState } from './todo.state';
+import { todoAdapter, TodoState } from './todo.state';
 
 export const selectTodoFeature = createFeatureSelector<TodoState>('todo');
 
 export const selectTodos = createSelector(
   selectTodoFeature,
-  (state: TodoState) => state.todoList
+  (state: TodoState) => todoAdapter.getSelectors().selectAll(state)
 );
 
 export const selectNumberOfTodos = createSelector(
-  selectTodos,
-  (todos: Todo[]) => todos.length || 0
+  selectTodoFeature,
+  (state: TodoState) => todoAdapter.getSelectors().selectTotal(state)
 );

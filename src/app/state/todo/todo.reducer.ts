@@ -5,21 +5,16 @@ import {
   deleteTodoSuccess,
   loadTodosSuccess,
 } from './todo.actions';
-import { initialTodoState } from './todo.state';
+import { initialTodoState, todoAdapter } from './todo.state';
 
 export const todoReducer = createReducer(
   initialTodoState,
 
-  on(addTodoSuccess, (state, { todo }) => ({
-    ...state,
-    todoList: [...state.todoList, todo],
-  })),
-  on(deleteTodoSuccess, (state, { id }) => ({
-    ...state,
-    todoList: state.todoList.filter((t) => t.id !== id),
-  })),
-  on(loadTodosSuccess, (state, { todoList }) => ({
-    ...state,
-    todoList: [...todoList],
-  }))
+  on(addTodoSuccess, (state, { todo }) =>
+    todoAdapter.addMany([todo, todo], state)
+  ),
+  on(deleteTodoSuccess, (state, { id }) => todoAdapter.removeOne(id, state)),
+  on(loadTodosSuccess, (state, { todoList }) =>
+    todoAdapter.setAll(todoList, state)
+  )
 );
