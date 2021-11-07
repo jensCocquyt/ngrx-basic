@@ -1,0 +1,11 @@
+<li class="list-group-item d-flex justify-content-between">
+  {{ todo.title }}
+
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm"
+    (click)="deleteTodo.emit(todo.id)"
+  >
+    <i class="bi bi-trash"></i>
+  </button>
+</li>
