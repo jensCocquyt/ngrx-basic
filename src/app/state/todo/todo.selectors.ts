@@ -6,10 +6,10 @@ export const selectTodoFeature = createFeatureSelector<TodoState>('todo');
 
 export const selectTodos = createSelector(
   selectTodoFeature,
-  (state: TodoState) => state.todoList
+  (state: TodoState): Todo[] => state.todoList
 );
 
 export const selectNumberOfTodos = createSelector(
   selectTodos,
-  (todos: Todo[]) => todos?.length || 0
+  (todos: Todo[]): number => todos?.length || 0
 );
