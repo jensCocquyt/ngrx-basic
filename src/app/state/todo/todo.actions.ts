@@ -1,29 +1,29 @@
 import { createAction, props } from '@ngrx/store';
 import { Todo } from 'src/app/todo/todo.model';
 
-export const addTodo = createAction(
-  '[Todo] add Todo',
+export const listAddButtonClicked = createAction(
+  '[Todo] list add button clicked',
   props<{ title: string }>()
 );
 
-export const addTodoSuccess = createAction(
-  '[Todo] add Todo success',
+export const listAddButtonClickedSuccess = createAction(
+  '[Todo] list add button clicked success',
   props<{ todo: Todo }>()
 );
 
-export const deleteTodo = createAction(
-  '[Todo] delete Todo',
+export const deleteTodoButtonClicked = createAction(
+  '[Todo] delete todo  button clicked ',
   props<{ id: string }>()
 );
 
-export const deleteTodoSuccess = createAction(
-  '[Todo] delete Todo success',
+export const deleteTodoButtonClickedSuccess = createAction(
+  '[Todo] delete Todo button clicked success',
   props<{ id: string }>()
 );
 
-export const loadTodos = createAction('[Todo] load Todos');
+export const loadTodosOverview = createAction('[Todo] load todos overview');
 
-export const loadTodosSuccess = createAction(
-  '[Todo] load todos success',
+export const loadTodosOverviewSuccess = createAction(
+  '[Todo] load todos overview success',
   props<{ todoList: Todo[] }>()
 );

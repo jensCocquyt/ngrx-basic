@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
 import {
-  addTodo,
-  deleteTodo,
-  loadTodos,
+  listAddButtonClicked,
+  deleteTodoButtonClicked,
+  loadTodosOverview,
 } from 'src/app/state/todo/todo.actions';
 import {
   selectNumberOfTodos,
@@ -21,14 +21,14 @@ export class TodoContainerComponent {
   numberOfTodos$ = this.store.select(selectNumberOfTodos);
 
   constructor(private store: Store) {
-    this.store.dispatch(loadTodos());
+    this.store.dispatch(loadTodosOverview());
   }
 
   onAddTodo(title: string) {
-    this.store.dispatch(addTodo({ title }));
+    this.store.dispatch(listAddButtonClicked({ title }));
   }
 
   onDeleteTodo(id: string) {
-    this.store.dispatch(deleteTodo({ id }));
+    this.store.dispatch(deleteTodoButtonClicked({ id }));
   }
 }

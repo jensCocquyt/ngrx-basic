@@ -3,46 +3,48 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, EMPTY, map, mergeMap } from 'rxjs';
 import { Todo } from 'src/app/todo/todo.model';
 import {
-  addTodo,
-  addTodoSuccess,
-  deleteTodo,
-  deleteTodoSuccess,
-  loadTodos,
-  loadTodosSuccess,
+  listAddButtonClicked,
+  listAddButtonClickedSuccess,
+  deleteTodoButtonClicked,
+  deleteTodoButtonClickedSuccess,
+  loadTodosOverview,
+  loadTodosOverviewSuccess,
 } from './todo.actions';
 import { TodoService } from './todo.service';
 
 @Injectable()
 export class TodoEffects {
-  loadTodos$ = createEffect(() =>
+  loadTodosOverview$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadTodos),
+      ofType(loadTodosOverview),
       mergeMap(() =>
         this.todoService
           .getAll()
-          .pipe(map((todoList: Todo[]) => loadTodosSuccess({ todoList })))
+          .pipe(
+            map((todoList: Todo[]) => loadTodosOverviewSuccess({ todoList }))
+          )
       )
     )
   );
 
-  addTodo$ = createEffect(() =>
+  listAddButtonClicked$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(addTodo),
+      ofType(listAddButtonClicked),
       mergeMap((action) =>
         this.todoService
           .addTodo(action.title)
-          .pipe(map((todo: Todo) => addTodoSuccess({ todo })))
+          .pipe(map((todo: Todo) => listAddButtonClickedSuccess({ todo })))
       )
     )
   );
 
-  deleteTodo$ = createEffect(() =>
+  deleteTodoButtonClicked$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(deleteTodo),
+      ofType(deleteTodoButtonClicked),
       mergeMap((action) =>
         this.todoService
           .deleteTodo(action.id)
-          .pipe(map((id) => deleteTodoSuccess({ id })))
+          .pipe(map((id) => deleteTodoButtonClickedSuccess({ id })))
       )
     )
   );
