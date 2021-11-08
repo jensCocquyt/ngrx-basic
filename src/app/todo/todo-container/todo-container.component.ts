@@ -7,6 +7,7 @@ import {
   loadTodosOverview,
 } from 'src/app/state/todo/todo.actions';
 import {
+  isTodoListLoading,
   selectNumberOfTodos,
   selectTodos,
 } from 'src/app/state/todo/todo.selectors';
@@ -19,6 +20,7 @@ import {
 export class TodoContainerComponent {
   todos$ = this.store.select(selectTodos);
   numberOfTodos$ = this.store.select(selectNumberOfTodos);
+  isTodoListLoading$ = this.store.select(isTodoListLoading);
 
   constructor(private store: Store) {
     this.store.dispatch(loadTodosOverview());

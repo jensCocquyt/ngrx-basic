@@ -4,12 +4,12 @@ import {
   listAddButtonClickedSuccess,
   deleteTodoButtonClickedSuccess,
   loadTodosOverviewSuccess,
+  loadTodosOverview,
 } from './todo.actions';
 import { initialTodoState } from './todo.state';
 
 export const todoReducer = createReducer(
   initialTodoState,
-
   on(listAddButtonClickedSuccess, (state, { todo }) => ({
     ...state,
     todoList: [...state.todoList, todo],
@@ -18,8 +18,13 @@ export const todoReducer = createReducer(
     ...state,
     todoList: state.todoList.filter((t) => t.id !== id),
   })),
+  on(loadTodosOverview, (state) => ({
+    ...state,
+    todoListLoading: true,
+  })),
   on(loadTodosOverviewSuccess, (state, { todoList }) => ({
     ...state,
     todoList: [...todoList],
+    todoListLoading: false,
   }))
 );

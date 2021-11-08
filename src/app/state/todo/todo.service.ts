@@ -9,7 +9,7 @@ export class TodoService {
   constructor() {}
 
   getAll(): Observable<Todo[]> {
-    return of([new Todo('Groceries'), new Todo('Dentist')]).pipe(delay(500));
+    return of([new Todo('Groceries'), new Todo('Dentist')]).pipe(delay(1500));
   }
 
   addTodo(title: string): Observable<Todo> {

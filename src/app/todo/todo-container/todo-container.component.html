@@ -4,14 +4,20 @@
       class="mb-4 d-block"
       [numberOfTodos]="numberOfTodos$ | async"
     ></todo-header>
-    <ul class="list-group">
-      <todo-item
-        *ngFor="let todo of todos$ | async"
-        [todo]="todo"
-        (deleteTodo)="onDeleteTodo($event)"
-      >
-      </todo-item>
-    </ul>
-    <todo-add (addTodo)="onAddTodo($event)"></todo-add>
+    <div class="loading" *ngIf="isTodoListLoading$ | async; else overviewList">
+      loading
+    </div>
+    <ng-template #overviewList>
+      <ul class="list-group">
+        <todo-item
+          *ngFor="let todo of todos$ | async"
+          [todo]="todo"
+          (deleteTodo)="onDeleteTodo($event)"
+        >
+        </todo-item>
+      </ul>
+
+      <todo-add (addTodo)="onAddTodo($event)"></todo-add>
+    </ng-template>
   </div>
 </div>
