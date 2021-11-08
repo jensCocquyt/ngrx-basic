@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { delay, Observable, of } from 'rxjs';
-import { Todo } from 'src/app/todo/todo.model';
 import {
   loadTodosOverview,
   listAddButtonClicked,

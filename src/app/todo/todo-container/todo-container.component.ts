@@ -1,16 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
-import {
-  listAddButtonClicked,
-  deleteTodoButtonClicked,
-  loadTodosOverview,
-} from 'src/app/state/todo/todo.actions';
+import { Component } from '@angular/core';
 import { TodoFacade } from 'src/app/state/todo/todo.facade';
-import {
-  selectNumberOfTodos,
-  selectTodos,
-} from 'src/app/state/todo/todo.selectors';
 
 @Component({
   selector: 'todo-container',
