@@ -1,13 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import {
-  deleteTodoButtonClicked,
-  listAddButtonClicked,
-} from 'src/app/state/todo/todo.actions';
-import {
-  selectNumberOfTodos,
-  selectTodos,
-} from 'src/app/state/todo/todo.selectors';
+import { Component } from '@angular/core';
+import { TodoFacade } from 'src/app/state/todo/todo.facade';
 
 @Component({
   selector: 'todo-container',
@@ -15,15 +7,15 @@ import {
   styleUrls: ['./todo-container.component.scss'],
 })
 export class TodoContainerComponent {
-  constructor(private store: Store) {}
-  todos$ = this.store.select(selectTodos);
-  numberOfTodos$ = this.store.select(selectNumberOfTodos);
+  todos$ = this.todoFacade.todos$;
+  numberOfTodos$ = this.todoFacade.numberOfTodos$;
+  constructor(private todoFacade: TodoFacade) {}
 
   onAddTodo(title: string) {
-    this.store.dispatch(listAddButtonClicked({ title }));
+    this.todoFacade.listAddButtonClicked(title);
   }
 
   onDeleteTodo(id: string) {
-    this.store.dispatch(deleteTodoButtonClicked({ id }));
+    this.todoFacade.deleteTodoButtonClicked(id);
   }
 }
