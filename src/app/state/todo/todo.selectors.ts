@@ -11,5 +11,5 @@ export const selectTodos = createSelector(
 
 export const selectNumberOfTodos = createSelector(
   selectTodos,
-  (todos: Todo[]) => todos.length || 0
+  (todos: Todo[]) => todos?.length || 0
 );
