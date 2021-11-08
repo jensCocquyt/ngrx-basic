@@ -6,6 +6,7 @@ import {
   deleteTodoButtonClicked,
   loadTodosOverview,
 } from 'src/app/state/todo/todo.actions';
+import { TodoFacade } from 'src/app/state/todo/todo.facade';
 import {
   selectNumberOfTodos,
   selectTodos,
@@ -17,18 +18,17 @@ import {
   styleUrls: ['./todo-container.component.scss'],
 })
 export class TodoContainerComponent {
-  todos$ = this.store.select(selectTodos);
-  numberOfTodos$ = this.store.select(selectNumberOfTodos);
-
-  constructor(private store: Store) {
-    this.store.dispatch(loadTodosOverview());
+  todos$ = this.todoFacade.todos$;
+  numberOfTodos$ = this.todoFacade.numberOfTodos$;
+  constructor(private todoFacade: TodoFacade) {
+    this.todoFacade.loadTodosOverview();
   }
 
   onAddTodo(title: string) {
-    this.store.dispatch(listAddButtonClicked({ title }));
+    this.todoFacade.listAddButtonClicked(title);
   }
 
   onDeleteTodo(id: string) {
-    this.store.dispatch(deleteTodoButtonClicked({ id }));
+    this.todoFacade.deleteTodoButtonClicked(id);
   }
 }
