@@ -5,5 +5,5 @@ export interface TodoState {
 }
 
 export const initialTodoState: TodoState = {
-  todoList: [new Todo('title1')],
+  todoList: [],
 };
